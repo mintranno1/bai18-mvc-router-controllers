@@ -4,6 +4,8 @@ const express = require('express');
 const app = express();
 const port = 8000;
 
+const route = require('./routes'); //binh thuong tu nap file index ko can /index
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Log request to server
@@ -21,18 +23,7 @@ app.set('view engine', 'hbs');
 // Set src view static
 app.set('views', path.join(__dirname, 'resources/views'));
 
-//Router
-app.get('/', (req, res) => {
-    res.render('home');
-});
-app.get('/news', (req, res) => {
-    console.log('ket qua tim kiem ' + req.q);
-    res.render('news');
-});
-app.get('/search', (req, res) => {
-    
-    res.render('search');
-})
-
+//Routes init
+route(app); //goi tu file index -> folder routes
 
 app.listen(port, () => console.log(`Example app listening at http://localhost: ${port}`))
